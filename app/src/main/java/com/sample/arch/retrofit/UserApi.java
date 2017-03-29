@@ -22,7 +22,4 @@ public interface UserApi {
     @GET("/posts")
     Single<List<Post>> getPosts(@Query("userId") int userId);
 
-    @GET("/posts/{postId}")
-    Single<Post> getPost(@Path("postId") int postId);
-
 }

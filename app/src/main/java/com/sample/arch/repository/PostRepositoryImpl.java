@@ -27,8 +27,4 @@ public class PostRepositoryImpl implements PostRepository {
         return mUserApi.getPosts(userId);
     }
 
-    @Override
-    public Single<Post> getPost(int postId) {
-        return mUserApi.getPost(postId);
-    }
 }

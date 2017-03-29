@@ -14,5 +14,4 @@ public interface PostRepository {
 
     Single<List<Post>> getPosts(int userId);
 
-    Single<Post> getPost(int postId);
 }
