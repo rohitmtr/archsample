@@ -1,10 +1,12 @@
 package com.sample.arch.di;
 
 import com.sample.arch.di.Module.HomeModule;
-import com.sample.arch.di.Module.MainActvitiyModule;
+import com.sample.arch.di.Module.LeftMenuModule;
+import com.sample.arch.di.Module.MainActivitiyModule;
 import com.sample.arch.di.Module.UserApiModule;
 import com.sample.arch.di.Module.UserRepositoryModule;
 import com.sample.arch.di.scope.ActivityScope;
+import com.sample.arch.home.MainActivity;
 
 import dagger.Subcomponent;
 
@@ -13,7 +15,17 @@ import dagger.Subcomponent;
  */
 
 @ActivityScope
-@Subcomponent(modules = {MainActvitiyModule.class, UserRepositoryModule.class, UserApiModule.class})
+@Subcomponent(modules = {MainActivitiyModule.class, UserRepositoryModule.class, UserApiModule.class})
 public interface MainActivityComponent {
+
+    void inject(MainActivity mainActivity);
+
     HomeComponent plus(HomeModule homeModule);
+
+    LeftMenuComponent plus(LeftMenuModule menuModule);
+
+    interface ComponentProvider {
+        MainActivityComponent component();
+    }
+
 }

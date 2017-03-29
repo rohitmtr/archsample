@@ -3,6 +3,7 @@ package com.sample.arch.home;
 import com.sample.arch.R;
 import com.sample.arch.baserecyler.DelegationAdapter;
 import com.sample.arch.data.Post;
+import com.sample.arch.di.MainActivityComponent;
 import com.sample.arch.di.Module.HomeModule;
 import com.sample.arch.presenter.home.HomeContract;
 import com.sample.arch.rx.RxFragment;
@@ -31,8 +32,7 @@ public class HomeFragment extends RxFragment implements HomeContract.HomeView , 
         return new HomeFragment();
     }
 
-    @BindView(R.id.commentRecyclerView)
-    RecyclerView mRecyclerView;
+    @BindView(R.id.commentRecyclerView) RecyclerView mRecyclerView;
 
     @Inject HomeContract.Presenter mPresenter;
 
@@ -68,9 +68,11 @@ public class HomeFragment extends RxFragment implements HomeContract.HomeView , 
 
     @Override
     protected void setUpDependencyInjection() {
-        ((MainActivity) getActivity()).getSubcomponent()
-                .plus(new HomeModule(this, this, this))
-                .inject(this);
+        if (getActivity() instanceof MainActivityComponent.ComponentProvider) {
+            ((MainActivityComponent.ComponentProvider) getActivity()).component()
+                    .plus(new HomeModule(this, this, this))
+                    .inject(this);
+        }
     }
 
     @Override

@@ -14,12 +14,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-    <com.sample.arch.home.LeftMenuView
+    <com.sample.arch.home.leftmenu.LeftMenuView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/nav_header_main"/>
+            android:fitsSystemWindows="true">
+
+        <android.support.v7.widget.RecyclerView
+                android:paddingTop="8dp"
+                android:layout_margin="8dp"
+                android:id="@+id/userRecyclerView"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        <ProgressBar
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/Widget.ProgressBar.Large" />
+
+
+    </com.sample.arch.home.leftmenu.LeftMenuView>
 
 </android.support.v4.widget.DrawerLayout>

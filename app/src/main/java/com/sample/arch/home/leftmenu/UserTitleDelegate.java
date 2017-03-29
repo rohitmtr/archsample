@@ -1,9 +1,9 @@
-package com.sample.arch.home;
+package com.sample.arch.home.leftmenu;
 
 import com.sample.arch.R;
 import com.sample.arch.baserecyler.ButterKnifeAdapterViewDelegate;
 import com.sample.arch.baserecyler.ButterKnifeViewHolder;
-import com.sample.arch.data.Post;
+import com.sample.arch.data.User;
 
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -16,31 +16,31 @@ import javax.inject.Inject;
 import butterknife.BindView;
 
 
-public class PostTitleDelegate extends ButterKnifeAdapterViewDelegate<Post, PostTitleDelegate.TitleViewHolder> {
+public class UserTitleDelegate extends ButterKnifeAdapterViewDelegate<User, UserTitleDelegate.TitleViewHolder> {
 
-    public interface PostClickListener {
-        void onPostClick(Post post);
+    public interface UserClickListener {
+        void onPostClick(User post);
     }
 
-    private PostClickListener mPostClickListener;
+    private UserClickListener mUserClickListener;
 
     @Inject
-    public PostTitleDelegate(PostClickListener clickListener) {
-        mPostClickListener = clickListener;
+    public UserTitleDelegate(UserClickListener clickListener) {
+        mUserClickListener = clickListener;
     }
 
     @Override public boolean isForViewType(Object item) {
-        return (item instanceof Post);
+        return (item instanceof User);
     }
 
     @NonNull
     @Override
-    public PostTitleDelegate.TitleViewHolder onCreateViewHolder(ViewGroup parent) {
+    public UserTitleDelegate.TitleViewHolder onCreateViewHolder(ViewGroup parent) {
         final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.title_list_item, parent, false);
-        return new PostTitleDelegate.TitleViewHolder(v);
+        return new UserTitleDelegate.TitleViewHolder(v);
     }
 
-    final class TitleViewHolder extends ButterKnifeViewHolder<Post> {
+    final class TitleViewHolder extends ButterKnifeViewHolder<User> {
 
         @BindView(R.id.textView) TextView mName;
 
@@ -50,13 +50,11 @@ public class PostTitleDelegate extends ButterKnifeAdapterViewDelegate<Post, Post
         }
 
         @Override
-        protected void setData(final Post post) {
-            mName.append(post.title());
-            mName.append("/n");
-            mName.append(post.body());
+        protected void setData(final User user) {
+            mName.append(user.name());
             mName.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    mPostClickListener.onPostClick(post);
+                    mUserClickListener.onPostClick(user);
                 }
             });
         }

@@ -12,6 +12,8 @@ import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import org.reactivestreams.Publisher;
 
+import android.util.Log;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,6 +22,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by rohitkumar.yadav on 27/3/17.
@@ -41,21 +44,19 @@ public class HomePresenter implements HomeContract.Presenter {
         mPostsInteractor = postsInteractor;
         mSetGetUserInteractor = setGetUserInteractor;
         mPostDataAdapter = postDataAdapter;
-
         mSetGetUserInteractor.getSelectedUser()
-                .doOnNext(new Consumer<User>() {
-                    @Override
-                    public void accept(User user) throws Exception {
-                        mHomeView.showLoader();
-                    }
-                })
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Function<User, Publisher<List<Post>>>() {
-                    @Override
-                    public Publisher<List<Post>> apply(User user) throws Exception {
-                        return  mPostsInteractor.getPosts(user.id());
-                    }
-                })
+                .compose(mRxBinder.<User>asyncCallWithinLifecycle())
+                .subscribe(new Consumer<User>() {
+            @Override
+            public void accept(User user) throws Exception {
+              loadPost(user);
+            }
+        });
+    }
+
+    private void loadPost(User user) {
+        mHomeView.showLoader();
+        mPostsInteractor.getPosts(user.id())
                 .compose(mRxBinder.<List<Post>>asyncCallWithinLifecycle())
                 .subscribe(new Consumer<List<Post>>() {
                     @Override
@@ -63,12 +64,12 @@ public class HomePresenter implements HomeContract.Presenter {
                         mPostDataAdapter.setPage(posts);
                         mHomeView.hideLoader();
                     }
-                },new Consumer<Throwable>() {
+                }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         mHomeView.hideLoader();
+                        Log.e("HomePresenter:", "", throwable);
                     }
                 });
     }
-
 }
