@@ -23,6 +23,5 @@ public abstract class UserRepositoryModule {
 
     //use @binds to create the object by dagger
     @Binds
-    @Singleton
     public abstract UserRepository bindRepository(UserRepositoryImpl userRepository);
 }

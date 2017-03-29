@@ -15,7 +15,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {AppModule.class, OkHttpModule.class, RetrofitModule.class, UserRepositoryModule.class, UserApiModule.class})
+@Component(modules = {AppModule.class, OkHttpModule.class, RetrofitModule.class})
 public interface AppComponent {
 
     MainActivityComponent plus();

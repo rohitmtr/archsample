@@ -46,9 +46,10 @@ public class HomePresenter implements HomeContract.Presenter {
                 .doOnNext(new Consumer<User>() {
                     @Override
                     public void accept(User user) throws Exception {
-                        //mHomeView.showLoader();
+                        mHomeView.showLoader();
                     }
                 })
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .flatMap(new Function<User, Publisher<List<Post>>>() {
                     @Override
                     public Publisher<List<Post>> apply(User user) throws Exception {

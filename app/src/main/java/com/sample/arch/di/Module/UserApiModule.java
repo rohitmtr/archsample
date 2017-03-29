@@ -15,6 +15,7 @@ import retrofit2.Retrofit;
 @Module
 public class UserApiModule {
 
+    //We can't use @bind here because Retrofit is creating object so dagger can not.
     @Provides
     public static UserApi provideUserApi(@Named(OkHttpModule.CACHE) Retrofit retrofit) {
         return retrofit.create(UserApi.class);
