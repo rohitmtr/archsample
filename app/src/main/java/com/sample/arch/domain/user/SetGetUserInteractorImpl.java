@@ -1,7 +1,6 @@
 package com.sample.arch.domain.user;
 
 import com.sample.arch.data.User;
-import com.sample.arch.domain.UseCase;
 import com.sample.arch.preference.AppPreference;
 import com.sample.arch.repository.UserRepository;
 import com.sample.arch.rx.RxUtils;

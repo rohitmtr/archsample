@@ -14,7 +14,7 @@ import java.util.List;
 public interface HomeContract {
 
     interface Presenter extends BasePresenter {
-        //void loadPost();
+
     }
 
     interface HomeView extends BaseView<Presenter> {

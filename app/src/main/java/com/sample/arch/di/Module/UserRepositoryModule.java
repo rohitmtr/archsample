@@ -1,5 +1,6 @@
 package com.sample.arch.di.Module;
 
+import com.sample.arch.di.scope.ActivityScope;
 import com.sample.arch.repository.PostRepository;
 import com.sample.arch.repository.PostRepositoryImpl;
 import com.sample.arch.repository.UserRepository;
@@ -23,5 +24,6 @@ public abstract class UserRepositoryModule {
 
     //use @binds to create the object by dagger
     @Binds
+    @ActivityScope
     public abstract UserRepository bindRepository(UserRepositoryImpl userRepository);
 }

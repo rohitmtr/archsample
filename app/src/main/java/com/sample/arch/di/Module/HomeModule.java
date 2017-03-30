@@ -4,6 +4,8 @@ import com.sample.arch.baserecyler.DelegationAdapter;
 import com.sample.arch.di.scope.FragmentScope;
 import com.sample.arch.domain.post.PostsInteractor;
 import com.sample.arch.domain.post.PostsInteractorImpl;
+import com.sample.arch.domain.post.SelectedUserPostsInteractorImpl;
+import com.sample.arch.domain.post.SelectedUserPostsInteractor;
 import com.sample.arch.home.PostDataAdapter;
 import com.sample.arch.home.PostDelegateAdapter;
 import com.sample.arch.home.PostTitleDelegate;
@@ -49,7 +51,7 @@ public class HomeModule {
         HomeContract.Presenter bindPresenter(HomePresenter presenter);
 
         @Binds
-        PostsInteractor bindLoadPostUseCase(PostsInteractorImpl postsInteractor);
+        SelectedUserPostsInteractor bindSelectedUserPostsInteractor(SelectedUserPostsInteractorImpl userPostsInteractor);
 
         @Binds
         DelegationAdapter bindPostDelegateAdapter(PostDelegateAdapter postDataAdapter);

@@ -4,8 +4,8 @@ import com.sample.arch.App;
 import com.sample.arch.R;
 import com.sample.arch.data.User;
 import com.sample.arch.di.MainActivityComponent;
-import com.sample.arch.di.Module.MainActivitiyModule;
-import com.sample.arch.domain.user.SetGetUserInteractor;
+import com.sample.arch.di.Module.MainActivityModule;
+import com.sample.arch.presenter.home.MainActivityContract;
 import com.sample.arch.rx.RxActivity;
 import com.sample.arch.utils.FragmentUtils;
 
@@ -19,17 +19,16 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.functions.Consumer;
 
-public class MainActivity extends RxActivity implements MainActivityComponent.ComponentProvider {
+public class MainActivity extends RxActivity implements MainActivityComponent.ComponentProvider, MainActivityContract.View {
 
-   @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
+    @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
 
     private MainActivityComponent mSubcomponent;
 
-    //Experiment
-    @Inject
-    SetGetUserInteractor mSetGetUserInteractor;
+    /// have to inject to listen the user change
+    @Inject MainActivityContract.Presenter mPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +39,19 @@ public class MainActivity extends RxActivity implements MainActivityComponent.Co
         setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
-            FragmentUtils.replaceAddToStack(getSupportFragmentManager(), R.id.content_fragment, HomeFragment.newInstance());
+            FragmentUtils.replace(getSupportFragmentManager(), R.id.content_fragment, HomeFragment.newInstance(),false);
         }
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
+    }
 
-        mSetGetUserInteractor
-                .getSelectedUser()
-                .compose(this.<User>asyncCallWithinLifecycle()).subscribe(new Consumer<User>() {
-            @Override
-            public void accept(User user) throws Exception {
-                setTitle(user.name());
-                closeDrawer();
-            }
-        });
+    @Override
+    public void onUserChange(User user) {
+        setTitle(user.name());
+        closeDrawer();
     }
 
     @Override
@@ -79,7 +74,7 @@ public class MainActivity extends RxActivity implements MainActivityComponent.Co
         super.setUpDependencyInjection();
         mSubcomponent = App.get(getApplication())
                 .getAppComponent()
-                .plus(new MainActivitiyModule(this));
+                .plus(new MainActivityModule(this, this));
         mSubcomponent.inject(this);
     }
 
