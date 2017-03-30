@@ -66,7 +66,7 @@ Left Navigation Drawer have all User list implemented by CustomView Appoarch. an
 and when user select any user then it set that user into [SetGetUserInteractor](https://github.com/rohitmtr/archsample/blob/master/app/src/main/java/com/sample/arch/domain/user/SetGetUserInteractor.java).
 
 [HomeFragment](https://github.com/rohitmtr/archsample/blob/master/app/src/main/java/com/sample/arch/home/HomeFragment.java) in [MainActivity](https://github.com/rohitmtr/archsample/blob/master/app/src/main/java/com/sample/arch/home/MainActivity.java)
-Subscibe to [SetGetUserInteractor](https://github.com/rohitmtr/archsample/blob/master/app/src/main/java/com/sample/arch/domain/user/SetGetUserInteractor.java) so when user change it fetch data from [PostsInteractor](https://github.com/rohitmtr/archsample/blob/master/app/src/main/java/com/sample/arch/domain/post/PostsInteractor.java).
+Subscibe to [SelectedUserPostsInteractor](https://github.com/rohitmtr/archsample/blob/master/app/src/main/java/com/sample/arch/domain/post/SelectedUserPostsInteractor.java) so when user change it fetch data from [PostRepository](https://github.com/rohitmtr/archsample/blob/master/app/src/main/java/com/sample/arch/repository/PostRepository.java).
 
 
 
