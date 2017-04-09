@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 
 /**
  * Created by rohitkumar.yadav on 26/3/17.
@@ -26,7 +27,7 @@ public class PostsInteractorImpl implements PostsInteractor {
 
 
     @Override
-    public Flowable<List<Post>> getPosts(int userId) {
-        return mPostRepository.getPosts(userId).toFlowable();
+    public Observable<List<Post>> getPosts(int userId) {
+        return mPostRepository.getPosts(userId).toObservable();
     }
 }

@@ -5,6 +5,7 @@ import com.sample.arch.data.User;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 
 /**
  * Created by rohitkumar.yadav on 26/3/17.
@@ -12,9 +13,9 @@ import io.reactivex.Flowable;
 
 public interface UserRepository {
 
-    Flowable<List<User>> getUsers();
+    Observable<List<User>> getUsers();
 
     void setSelected(User user);
 
-    Flowable<User> getSelected();
+    Observable<User> getSelected();
 }

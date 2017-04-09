@@ -11,6 +11,7 @@ import android.content.Context;
 import android.support.design.widget.NavigationView;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
  * Created by rohitkumar.yadav on 27/3/17.
  */
 
-public class LeftMenuView extends NavigationView implements LeftMenuContract.View, UserTitleDelegate.UserClickListener {
+public class LeftMenuView extends FrameLayout implements LeftMenuContract.View, UserTitleDelegate.UserClickListener {
 
     @Inject DelegationAdapter mDelegationAdapter;
 

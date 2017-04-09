@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -44,7 +45,7 @@ public class SetGetUserInteractorImpl implements SetGetUserInteractor {
     }
 
     @Override
-    public Flowable<User> getSelectedUser() {
+    public Observable<User> getSelectedUser() {
         return mUserRepository.getSelected();
     }
 

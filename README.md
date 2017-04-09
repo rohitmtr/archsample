@@ -1,7 +1,7 @@
 # Architecture Sample
 
   This is sample code for organising the code or architecure of the app that we are following here. 
-  We are are following Clean Architecture pattern. 
+  We are are following Unnamed Architecture pattern.
 
 Code is mainly divide into three part 
 ### Data Layer

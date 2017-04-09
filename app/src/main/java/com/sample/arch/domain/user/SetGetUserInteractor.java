@@ -4,6 +4,7 @@ import com.sample.arch.data.User;
 import com.sample.arch.domain.UseCase;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 
 /**
  * Created by rohitkumar.yadav on 27/3/17.
@@ -11,7 +12,7 @@ import io.reactivex.Flowable;
 
 public interface SetGetUserInteractor extends UseCase<User> {
 
-    Flowable<User> getSelectedUser();
+    Observable<User> getSelectedUser();
 
     void setSelectedUser(User user);
 }

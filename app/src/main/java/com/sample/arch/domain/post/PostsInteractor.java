@@ -6,6 +6,7 @@ import com.sample.arch.domain.UseCase;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 
 /**
  * Created by rohitkumar.yadav on 28/3/17.
@@ -13,6 +14,6 @@ import io.reactivex.Flowable;
 
 public interface PostsInteractor extends UseCase<Post> {
 
-    Flowable<List<Post>> getPosts(int userId);
+    Observable<List<Post>> getPosts(int userId);
 
 }

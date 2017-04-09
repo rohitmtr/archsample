@@ -9,6 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 
 /**
  * Created by rohitkumar.yadav on 26/3/17.
@@ -24,7 +25,7 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public Flowable<List<User>> getUsers() {
+    public Observable<List<User>> getUsers() {
         return mUserRepository.getUsers();
     }
 }
